@@ -76,6 +76,8 @@ A module can have both named exports and a default export When importing, you ca
 ### Why do you use className as a property in React and not class?
 In React, the reason className is used instead of class as a property to define HTML classes is due to JSX syntax. JSX is a syntax extension for JavaScript that allows developers to write HTML-like code within their JavaScript files, particularly when building React components. JSX makes it easier to define the structure of UI components and is a popular choice in the React ecosystem.
 Here is an example;
+
+```javascript
 import React from 'react';
 
 const MyComponent = () => {
@@ -86,12 +88,15 @@ const MyComponent = () => {
   );
 };
 export default MyComponent;
+```
 
 React will translate this JSX code into regular JavaScript, and eventually into HTML when rendering the component to the DOM. During this process, className will be transformed into class in the resulting HTML markup, ensuring compatibility with standard HTML and CSS while maintaining consistency with JavaScript syntax within JSX.
 
 ### Why should you not write the following? What will happen?
 
+```javascript
 <button onClick={setCounter(counter + 1)}> +1 </button>
+```
 
 This is problematic since it passes the result of executing setCounter(counter + 1) rather than a function to the onClick prop. This leads to a number of problems:
 Immediate Invocation: In this code, setCounter(counter + 1) is invoked immediately when the component renders. This means that every time the component renders, this expression will be evaluated, causing setCounter to be called with a new value for counter.
@@ -99,13 +104,17 @@ State Update during Rendering: When setCounter(counter + 1) is called inside the
 Infinite Render Loop: Since setCounter(counter + 1) causes a state update, it triggers a re-render of the component. This re-render will again execute the expression setCounter(counter + 1), leading to an infinite loop of re-renders and updates.
 The correct approach is to define an event handler function or pass an inline arrow function as illustrates: 
 
+```javascript
 <button onClick={() => setCounter(counter + 1)}> +1 </button>
+```
 
 The onClick handler is a function that will be executed when the button is clicked, and it correctly updates the state of counter based on its previous value without causing unintended side effects or infinite loops.
 
 ### What is object deconstruction and how is it connected to React components (example)?
 Object destructuring is a JavaScript feature that allows you to extract properties from objects and assign them to variables with the same name. It provides a concise and readable way to work with object properties. In the context of React components, object destructuring is often used to extract values from props or state objects.
 An example within a React component is as follows:
+
+```javascript
 import React from 'react';
 
 // Example: Destructuring props in a functional component
@@ -127,6 +136,76 @@ const App = () => {
 
   return <MyComponent {...data} />;
 };
+```
+
 The MyComponent functional component receives an object as its props. Instead of accessing props.prop1 and props.prop2 directly, object destructuring is used in the function parameters of MyComponent to extract these properties directly.
 The App component then uses the MyComponent and spreads the data object into its props. This allows the properties of the data object to be passed as individual props to MyComponent.
+
+### How is it possible to use HTML and JavaScript in the same function (like in a React Component)? What makes it possible under the hood?
+This is made possible by the way React processes JSX and JavaScript under the hood. JSX is a syntax extension for JavaScript that looks similar to XML or HTML. When you write JSX in your React components, it gets transformed into JavaScript code before being executed. The transformation is typically done by a tool like Babel during the build process.
+How JSX Works Under the Hood.
+Transformation: When you write JSX in a React component, tools like Babel transform this JSX into standard JavaScript. Each HTML-like tag in JSX corresponds to a function call that creates a React element. 
+React.createElement: The transpiled code uses React.createElement to create a virtual DOM representation of the JSX structure. The React.createElement function takes the HTML tag name, any attributes, and the content as parameters.
+
+Virtual DOM: React uses this virtual DOM representation to efficiently update the actual DOM when there are changes in the component's state or props. It calculates the difference between the previous and current virtual DOM states and updates only the necessary parts of the actual DOM.
+An example;
+
+```javascript
+import React from 'react';
+
+const Counter = () => {
+  const count = 0;
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => console.log('Increment!')}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+In this example, JSX is used to define the structure of the component, while JavaScript logic is embedded within the curly braces {} to handle dynamic content and event handling.
+
+### What is async/await? Bring an example
+async/await is a feature in JavaScript that simplifies working with asynchronous code. It allows you to write asynchronous code in a more synchronous-like manner, making it easier to read and maintain. The async keyword is used to define a function as asynchronous, and the await keyword is used to pause the execution of the function until a promise is settled (resolved or rejected).
+Example:
+
+```javascript
+const fetchData = async () => {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+```
+
+### What is a Promise? Bring an example
+A Promise is a built-in JavaScript object that represents the eventual completion or failure of an asynchronous operation and its resulting value. Promises are a way to handle asynchronous code more easily and provide a cleaner alternative to using callbacks.
+A Promise has three states:
+•	Pending: The initial state, representing that the asynchronous operation is still in progress.
+•	Fulfilled: The operation completed successfully, and the promise has a resulting value.
+•	Rejected: The operation failed, and the promise has a reason for the failure.
+An example:
+
+```javascript
+function getData(){
+  return new Promise((resolve, reject) =>;
+  {
+    setTimeout(() => {
+    const success = true;
+      if (success) {
+      resolve (‘Data fetched successsfully’);
+      } else {
+      reject (‘Error’);
+      }
+    }, 1000);
+  });
+}
+```
 
