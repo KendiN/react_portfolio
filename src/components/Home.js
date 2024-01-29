@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { BiLogoGithub, BiLogoLinkedinSquare } from "react-icons/bi";
 
 function Home() {
   return (
@@ -13,8 +13,8 @@ function Home() {
             and intuitive user interfaces in my portfolio.
         </p>
         <div className="socials">
-        <a href="https://www.linkedin.com/in/kendi-njeru-b368a4209/"><i className="bx bxl-linkedin"></i></a>
-        <a href="https://github.com/KendiN"><i className='bx bxl-github'></i></a>
+        <a href="https://www.linkedin.com/in/kendi-njeru-b368a4209/"><i className="bx bxl-linkedin"></i><BiLogoLinkedinSquare /></a>
+        <a href="https://github.com/KendiN"><i className='bx bxl-github'></i><BiLogoGithub /></a>
         </div>
         <a href="Resume.pdf" download className="btn">Download CV</a>
     </div>  
