@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiCodeBlock, BiCodeAlt, BiMobileAlt } from "react-icons/bi";
 
 
 function Services() {
@@ -9,7 +10,7 @@ function Services() {
 
     <div className="services-container">
         <div className="services-box">
-            <i className='bx bx-code-block'></i>
+            <i className='bx bx-code-block'><BiCodeBlock /></i>
             <h3>Web Development</h3>
             <p>
                 I build eye-catching websites that are both functional and 
@@ -19,7 +20,7 @@ function Services() {
         </div>
 
         <div className="services-box">
-            <i className='bx bx-code-alt' ></i>
+            <i className='bx bx-code-alt' ><BiCodeAlt /></i>
             <h3>UI/UX Design</h3>
             <p>
                 Crafting user-friendly interfaces and smooth experiences, 
@@ -30,7 +31,7 @@ function Services() {
         </div>
 
         <div className="services-box">
-            <i className='bx bx-mobile' ></i>
+            <i className='bx bx-mobile' ><BiMobileAlt /></i>
             <h3>Mobile Development</h3>
             <p>
                 Transforming ideas into user-friendly mobile apps, 
