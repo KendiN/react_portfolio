@@ -73,3 +73,60 @@ A module can have both named exports and a default export When importing, you ca
    console.log(namedExport1, namedExport2, myDefaultExport);
    ```
 
+### Why do you use className as a property in React and not class?
+In React, the reason className is used instead of class as a property to define HTML classes is due to JSX syntax. JSX is a syntax extension for JavaScript that allows developers to write HTML-like code within their JavaScript files, particularly when building React components. JSX makes it easier to define the structure of UI components and is a popular choice in the React ecosystem.
+Here is an example;
+import React from 'react';
+
+const MyComponent = () => {
+  return (
+    <div className="my-class">
+      <p>Hello, world!</p>
+    </div>
+  );
+};
+export default MyComponent;
+
+React will translate this JSX code into regular JavaScript, and eventually into HTML when rendering the component to the DOM. During this process, className will be transformed into class in the resulting HTML markup, ensuring compatibility with standard HTML and CSS while maintaining consistency with JavaScript syntax within JSX.
+
+### Why should you not write the following? What will happen?
+
+<button onClick={setCounter(counter + 1)}> +1 </button>
+
+This is problematic since it passes the result of executing setCounter(counter + 1) rather than a function to the onClick prop. This leads to a number of problems:
+Immediate Invocation: In this code, setCounter(counter + 1) is invoked immediately when the component renders. This means that every time the component renders, this expression will be evaluated, causing setCounter to be called with a new value for counter.
+State Update during Rendering: When setCounter(counter + 1) is called inside the JSX, it triggers a state update. However, state updates should not be performed during rendering because they can cause unnecessary re-renders and lead to performance issues, infinite render loops, or stale state values.
+Infinite Render Loop: Since setCounter(counter + 1) causes a state update, it triggers a re-render of the component. This re-render will again execute the expression setCounter(counter + 1), leading to an infinite loop of re-renders and updates.
+The correct approach is to define an event handler function or pass an inline arrow function as illustrates: 
+
+<button onClick={() => setCounter(counter + 1)}> +1 </button>
+
+The onClick handler is a function that will be executed when the button is clicked, and it correctly updates the state of counter based on its previous value without causing unintended side effects or infinite loops.
+
+### What is object deconstruction and how is it connected to React components (example)?
+Object destructuring is a JavaScript feature that allows you to extract properties from objects and assign them to variables with the same name. It provides a concise and readable way to work with object properties. In the context of React components, object destructuring is often used to extract values from props or state objects.
+An example within a React component is as follows:
+import React from 'react';
+
+// Example: Destructuring props in a functional component
+const MyComponent = ({ prop1, prop2 }) => {
+  return (
+    <div>
+      <p>{prop1}</p>
+      <p>{prop2}</p>
+    </div>
+  );
+};
+
+// Usage of the component
+const App = () => {
+  const data = {
+    prop1: 'Value 1',
+    prop2: 'Value 2',
+  };
+
+  return <MyComponent {...data} />;
+};
+The MyComponent functional component receives an object as its props. Instead of accessing props.prop1 and props.prop2 directly, object destructuring is used in the function parameters of MyComponent to extract these properties directly.
+The App component then uses the MyComponent and spreads the data object into its props. This allows the properties of the data object to be passed as individual props to MyComponent.
+
