@@ -1,6 +1,6 @@
 # Q&A
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Visit Site: https://kendin.github.io/react_portfolio/
 
 ### What is NPM?
 NPM (Node Package Manager) is a is a package manager for Javascript which is used to manage, install and share packages for Node.js. It also provides dependency management by automatically handling a project's dependencies, ensuring that the right library versions are installed and avoiding conflicts between various packages.
